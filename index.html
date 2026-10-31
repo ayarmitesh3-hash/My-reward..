@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0a0612">
+<title>My Reward</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app"><p class="muted center">Loading…</p></div>
+<div id="toast" role="status"></div>
+<script>
+setTimeout(function () {
+  var a = document.getElementById("app");
+  if (a && a.textContent.trim() === "Loading…") {
+    a.innerHTML = '<p class="muted center">Still loading. Open this page from your GitHub Pages link (https://YOURNAME.github.io/my-reward/), not as a local file or preview. Also check that app.js, firebase-config.js and style.css are in the same folder.</p>';
+  }
+}, 8000);
+</script>
+<script type="module" src="app.js"></script>
+</body>
+</html>
