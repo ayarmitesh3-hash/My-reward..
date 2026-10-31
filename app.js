@@ -214,4 +214,29 @@ async function admin() {
   $("#ul").innerHTML = us.docs.map((d) => `<div class="card row"><div><b>${esc(d.data().email)}</b><p class="muted">${d.data().testCoins} coins${d.data().banned ? " · banned" : ""}</p></div>
     ${d.id === me.uid ? "" : `<button class="alt" data-ban="${d.id}" data-b="${!d.data().banned}">${d.data().banned ? "Unban" : "Ban"}</button>`}</div>`).join("");
   $("#ul").querySelectorAll("[data-ban]").forEach((b) => (b.onclick = async () => { await updateDoc(doc(db, "users", b.dataset.ban), { banned: b.dataset.b === "true" }); admin(); }));
-    }
+    }// ---------- Test Redeem Store ----------
+async function redeemStore() {
+  $("#view").innerHTML = `
+    <h2>Redeem Store</h2>
+    <div class="card">
+      <h3>🎮 Google Play Gift Card</h3>
+      <p class="muted">Test request only</p>
+      <button class="full" id="gp">Request Google Play</button>
+    </div>
+    <div class="card">
+      <h3>💳 FamApp Withdrawal</h3>
+      <p class="muted">Test request only</p>
+      <button class="full" id="fam">Request FamApp</button>
+    </div>
+    <div class="card">
+      <p class="muted">No real money or gift cards are issued.</p>
+    </div>
+  `;
+
+  async function sendRequest(type) {
+    toast("Test request UI ready. Database connection is not added yet.");
+  }
+
+  $("#gp").onclick = () => sendRequest("Google Play");
+  $("#fam").onclick = () => sendRequest("FamApp");
+}
