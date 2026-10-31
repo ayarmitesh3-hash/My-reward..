@@ -214,29 +214,33 @@ async function admin() {
   $("#ul").innerHTML = us.docs.map((d) => `<div class="card row"><div><b>${esc(d.data().email)}</b><p class="muted">${d.data().testCoins} coins${d.data().banned ? " · banned" : ""}</p></div>
     ${d.id === me.uid ? "" : `<button class="alt" data-ban="${d.id}" data-b="${!d.data().banned}">${d.data().banned ? "Unban" : "Ban"}</button>`}</div>`).join("");
   $("#ul").querySelectorAll("[data-ban]").forEach((b) => (b.onclick = async () => { await updateDoc(doc(db, "users", b.dataset.ban), { banned: b.dataset.b === "true" }); admin(); }));
-    }// ---------- Test Redeem Store ----------
+    }// ---------- Google Play Gift Card Test Store ----------
 async function redeemStore() {
   $("#view").innerHTML = `
-    <h2>Redeem Store</h2>
-    <div class="card">
-      <h3>🎮 Google Play Gift Card</h3>
-      <p class="muted">Test request only</p>
-      <button class="full" id="gp">Request Google Play</button>
+    <h2>Google Play Gift Card</h2>
+
+    <div class="card hero">
+      <p class="muted">Available Test Coins</p>
+      <div class="coins">${profile.testCoins} 🪙</div>
     </div>
+
     <div class="card">
-      <h3>💳 FamApp Withdrawal</h3>
-      <p class="muted">Test request only</p>
-      <button class="full" id="fam">Request FamApp</button>
-    </div>
-    <div class="card">
-      <p class="muted">No real money or gift cards are issued.</p>
+      <h3>Google Play Gift Card</h3>
+      <h2>₹10</h2>
+      <p class="muted">1000 Test Coins required</p>
+      <button class="full" id="requestGift">
+        Request Gift Card
+      </button>
+      <p class="muted">Demo only. No real gift card is issued.</p>
     </div>
   `;
 
-  async function sendRequest(type) {
-    toast("Test request UI ready. Database connection is not added yet.");
-  }
+  $("#requestGift").onclick = () => {
+    if (profile.testCoins < 1000) {
+      return toast("Need 1000 test coins");
+    }
 
-  $("#gp").onclick = () => sendRequest("Google Play");
-  $("#fam").onclick = () => sendRequest("FamApp");
+    toast("Demo request screen ready. No coins deducted.");
+  };
 }
+
