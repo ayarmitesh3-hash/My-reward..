@@ -103,13 +103,50 @@ async function award(txId, type, amount, note, ref, extra) {
 }
 const done = async (txId) => (await getDoc(doc(db, "users", me.uid, "tx", txId))).exists();
 
-// ---------- Home ----------
-function home() {
-  $("#view").innerHTML = `<div class="card hero"><p class="muted">Your test coins</p>
-    <div class="coins">${profile.testCoins} 🪙</div>
-    <span class="pill">≈ ₹${rupees(profile.testCoins)} · ${COIN_RATE}</span></div>
-    <div class="card"><b>Test mode</b><p class="muted">These coins are for testing only. They have no cash value and cannot be withdrawn.</p></div>
-    <div class="card"><b>Earn coins</b><p class="muted">Play the daily quiz, finish tasks from the admin, or redeem a code.</p></div>`;
+// ---------- Home ---------function home() {
+  $("#view").innerHTML = `
+    <div class="card hero">
+      <div class="row">
+        <div>
+          <p class="muted">👑 MY REWARD WALLET</p>
+          <h2>Welcome Back!</h2>
+        </div>
+        <div style="font-size:35px">💎</div>
+      </div>
+
+      <p class="muted">Your Total Test Coins</p>
+      <div class="coins">${profile.testCoins} 🪙</div>
+      <span class="pill">≈ ₹${rupees(profile.testCoins)}</span>
+      <p class="muted">100 Test Coins = ₹1 (display only)</p>
+    </div>
+
+    <div class="card">
+      <h3>🎁 Gift Card Store</h3>
+      <p class="muted">Explore the Google Play Gift Card demo store.</p>
+      <button onclick="show('gift')">Open Gift Store</button>
+    </div>
+
+    <div class="card">
+      <h3>🎯 Daily Quiz</h3>
+      <p class="muted">Play quiz and earn test coins.</p>
+      <button onclick="show('quiz')">Play Quiz</button>
+    </div>
+
+    <div class="card">
+      <h3>⚡ Complete Tasks</h3>
+      <p class="muted">Check available test tasks.</p>
+      <button onclick="show('tasks')">View Tasks</button>
+    </div>
+
+    <div class="card">
+      <h3>🔒 Test Mode</h3>
+      <p class="muted">
+        These are demo coins only. They have no cash value.
+        No real gift cards or money are issued.
+      </p>
+    </div>
+  `;
+}
 }
 
 // ---------- Quiz ----------
