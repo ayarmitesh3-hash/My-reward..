@@ -81,13 +81,13 @@ function showVerify() {
 function show(t) {
   if (t === "admin" && !isAdmin) t = "home";
   tab = t;
-  const tabs = [["home", "Home"], ["quiz", "Quiz"], ["tasks", "Tasks"], ["redeem", "Redeem"], ["history", "History"]];
+  const tabs = [["home", "Home"], ["quiz", "Quiz"], ["tasks", "Tasks"], ["redeem", "Redeem"], ["gift", "Gift Cards"], ["history", "History"]];
   if (isAdmin) tabs.push(["admin", "Admin"]);
   app.innerHTML = `<div class="row"><h1>My Reward</h1><button class="alt" id="lo">Log out</button></div>
     <div id="view"></div><nav>${tabs.map(([k, n]) => `<button data-t="${k}" class="${k === t ? "on" : ""}">${n}</button>`).join("")}</nav>`;
   $("#lo").onclick = () => signOut(auth);
   document.querySelectorAll("nav button").forEach((b) => (b.onclick = () => show(b.dataset.t)));
-  ({ home, quiz, tasks, redeem, history, admin })[t]();
+  ({ home, quiz, tasks, redeem, gift: redeemStore, history, admin })[t]();
 }
 
 async function refresh() { await loadProfile(); show(tab); }
