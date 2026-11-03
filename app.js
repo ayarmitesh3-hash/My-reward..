@@ -103,7 +103,8 @@ async function award(txId, type, amount, note, ref, extra) {
 }
 const done = async (txId) => (await getDoc(doc(db, "users", me.uid, "tx", txId))).exists();
 
-// ---------- Home ---------function home() {
+// ---------- Home ---------
+function home() {
   $("#view").innerHTML = `
     <div class="card hero">
       <div class="row">
